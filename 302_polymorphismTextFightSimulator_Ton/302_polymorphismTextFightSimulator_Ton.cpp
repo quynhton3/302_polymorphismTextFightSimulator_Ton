@@ -5,8 +5,8 @@
 using namespace std;
 
 //There are at least three types of monsters.
-int tMonster; // fire = 1, water = 2, earth = 3
-int tElement; // fire = 1, water = 2, earth = 3
+int tMonster; // fire = 1, water = 2, grass = 3
+int tElement; // fire = 1, water = 2, grass = 3
 
 float tEnemy1Health = 30;
 float tEnemy2Health = 30;
@@ -14,6 +14,9 @@ float tEnemy3Health = 30;
 float tEnemy4Health = 30;
 float tEnemy5Health = 30;
 
+float tEffective = 20;
+float tDamaged = 10;
+float tImmune = 0;
 
 float tPlayerHealth = 100;
 bool tIsLose = false;
@@ -35,48 +38,47 @@ int main()
 
 
 		//The player has three choices of attack, but some monster types are immune to one / some and some monsters take extra damage from one / some
-		if (tMonster == 1) { //if Fire Monster...
+		if (tMonster == 1) { //if FIRE Monster...
 			if (tElement == 1) { //is hit with fire...
-
+				tEnemy1Health -= tDamaged;
+				cout << "You hit the monster for ";
 			}
 			else if (tElement == 2) { //is hit with water...
-
-
+				tEnemy1Health -= tEffective;
+				cout << "You hit the monster for ";
 			}
-			else if (tElement == 3) { //is hit with earth...
-
-
+			else if (tElement == 3) { //is hit with grass...
+				cout << "That wasn't really effective... You hit the monster for 0 damage. ";
 			}
 
 		}
 
-		if (tMonster == 2) { //if Water Monster...
+		if (tMonster == 2) { //if WATER Monster...
 			if (tElement == 1) { //is hit with fire...
-				tEnemy1Health -= 20;
-				cout << "You hit the monster for";
+				cout << "That wasn't really effective... You hit the monster for 0 damage. ";
 			}
 			else if (tElement == 2) { //is hit with water...
-				tEnemy1Health -= 10;
-				cout << "You hit the monster for";
+				tEnemy1Health -= tDamaged;
+				cout << "You hit the monster for ";
 			}
-			else if (tElement == 3) { //is hit with earth...
-				cout << "That wasn't really effective... You hit the monster for";
-
+			else if (tElement == 3) { //is hit with grass...
+				tEnemy1Health -= tEffective;
+				cout << "You hit the monster for ";
 			}
 
 		}
 
-		if (tMonster == 3) { //if Earth Monster...
+		if (tMonster == 3) { //if GRASS Monster...
 			if (tElement == 1) { //is hit with fire...
-
+				tEnemy1Health -= tEffective;
+				cout << "You hit the monster for ";
 			}
 			else if (tElement == 2) { //is hit with water...
-
-
+				cout << "That wasn't really effective... You hit the monster for 0 damage. ";
 			}
-			else if (tElement == 3) { //is hit with earth...
-
-
+			else if (tElement == 3) { //is hit with grass...
+				tEnemy1Health -= tDamaged;
+				cout << "You hit the monster for ";
 			}
 
 		}
@@ -86,7 +88,10 @@ int main()
 
 
 		//Every action and result has concise feedback(Monster intro, damage taken / remaining.Concise.)
-
+		cout << "Enemy 1 HP: ";
+		cout << "Enemy 2 HP: ";
+		cout << "Enemy 3 HP: ";
+		
 
 
 
@@ -99,14 +104,3 @@ int main()
 
 
 }
-
-// Run program: Ctrl + F5 or Debug > Start Without Debugging menu
-// Debug program: F5 or Debug > Start Debugging menu
-
-// Tips for Getting Started: 
-//   1. Use the Solution Explorer window to add/manage files
-//   2. Use the Team Explorer window to connect to source control
-//   3. Use the Output window to see build output and other messages
-//   4. Use the Error List window to view errors
-//   5. Go to Project > Add New Item to create new code files, or Project > Add Existing Item to add existing code files to the project
-//   6. In the future, to open this project again, go to File > Open > Project and select the .sln file
