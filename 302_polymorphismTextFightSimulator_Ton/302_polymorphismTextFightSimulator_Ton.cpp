@@ -4,11 +4,15 @@
 #include <iostream>
 using namespace std;
 
+
+//Player input
+int tPlayer;
+
 //There are at least three types of monsters.
 int tMonster; // fire = 1, water = 2, grass = 3
 int tElement; // fire = 1, water = 2, grass = 3
 
-float tEnemyHP = 30;
+//float tEnemyHP = 30;
 
 
 //Damage Amounts 
@@ -18,6 +22,16 @@ float tImmune = 0;
 
 float tPlayerHP = 100;
 bool tIsLose = false;
+
+
+class PlayerMoves {
+protected:
+
+public:
+
+
+};
+
 
 
 class Enemy {
@@ -69,18 +83,30 @@ public:
 
 	//Getters and Setters
 	void SetFireHP(float tEnemyHP) { tFireHP = tEnemyHP; } 
-	//void SetFireHP(float tEnemyAP) { tFireAP = tEnemyAP; }
+	void SetFireAP(float tEnemyAP) { tFireAP = tEnemyAP; }
+	
 	float GetFireHP() { return tFireHP; }
 	float GetFireAP() { return tFireAP; }
 
 };
-
 
 class EnemyWater : public Enemy{
 protected: 
 	float tWaterHP = 80;
 	float tWaterAP = 20;
 public:
+	EnemyWater(string tEnemyName, float tEnemyHP, float tEnemyAP) : Enemy(tEnemyName)
+	{
+		tWaterHP = tEnemyHP; //50
+		tWaterAP = tEnemyAP; //30
+	}
+
+	//Getters and Setters
+	void SetFireHP(float tEnemyHP) { tWaterHP = tEnemyHP; }
+	void SetFireAP(float tEnemyAP) { tWaterAP = tEnemyAP; }
+
+	float GetFireHP() { return tWaterHP; }
+	float GetFireAP() { return tWaterAP; }
 
 };
 
@@ -90,23 +116,77 @@ protected:
 	float tGrassHP = 90;
 	float tGrassAP = 10;
 public:
+	EnemyGrass(string tEnemyName, float tEnemyHP, float tEnemyAP) : Enemy(tEnemyName)
+	{
+		tGrassHP = tEnemyHP; //50
+		tGrassAP = tEnemyAP; //30
+	}
+
+	//Getters and Setters
+	void SetFireHP(float tEnemyHP) { tGrassHP = tEnemyHP; }
+	void SetFireAP(float tEnemyAP) { tGrassAP = tEnemyAP; }
+
+	float GetFireHP() { return tGrassHP; }
+	float GetFireAP() { return tGrassAP; }
 
 };
 
 
+int DamageDelt() {
+	//If statements 
+	if (tPlayer == 1) { //Fire Attack 
+		cin >> tPlayer;
+		cout << "Which enemy do you want to attack?" << endl;
+
+		if (tPlayer == 1) { //Fire Enemy
+
+		}
+		else if (tPlayer == 2) { //Water Enemy 
+
+		}
+		else if (tPlayer == 3) { //Grass Enemy 
+
+		}
+	}
+
+}
+
+
+
 int main()
 {
-	Enemy enemy("Water Enemy");
+	cout << "Turn Based Game" << endl; 
 
-
-	EnemyFire fireEnemy("Fire Enemy", 10,10);
-	//EnemyWater enemyWater("WaterEnemy");
-	//EnemyFire enemyFire("FireEnemy");
-	cout << enemy.GetName() << endl;
-	cout << enemy.GetName() << " took " << fireEnemy.GetFireHP() << " damage. " << " They have ";
+	//Intro 
+	cout << "Animaal ";
 
 
 
+
+
+
+
+	Enemy enemy("Fire Enemy");
+	EnemyFire fireEnemy("Fire Enemy", 10, 10); //the name/1st paramtere doesnt work here why?
+	cout << enemy.GetName() << " took " << fireEnemy.GetFireHP() << " damage. " << endl << "They have " << fireEnemy.GetFireHP() << " HP remaining. " << endl;
+	cout << enemy.GetName() << " Attacked you for " << fireEnemy.GetFireAP() << " Attack Points. " << endl;
+	
+	cout << "What will you do?" << endl;
+	cout << "              [ [1] = Fire Spell " << " [2] = Water Spell " << " [3] = Grass Spell ] " << endl;
+	
+	cin >> tPlayer; //gets user input from the keyboard 
+	system("cls"); //clears screen 
+
+	//
+	if (tPlayer == 1) {
+		cout << "Who will you attack?" << endl;
+
+		cout << enemy.GetName() << "[1]" << endl;
+		cout << enemy.GetName() << "[2]" << endl;
+		cout << enemy.GetName() << "[3]" << endl;
+		cout << enemy.GetName() << "[4]" << endl;
+
+	}
 
 
 
