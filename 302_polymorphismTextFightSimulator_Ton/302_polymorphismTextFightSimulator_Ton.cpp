@@ -56,15 +56,15 @@ public:
 
 
 
-	//before class
-	void SetHitPoints(int start)
-	{
-		tDamaged = start;
-	}
-	virtual void GetHit(int damage)
-	{
-		tDamaged -= damage;
-	}
+	////before class
+	//void SetHitPoints(int start)
+	//{
+	//	tDamaged = start;
+	//}
+	//virtual void GetHit(int damage)
+	//{
+	//	tDamaged -= damage;
+	//}
 };
 
 
@@ -132,12 +132,61 @@ public:
 };
 
 
-int DamageDelt() {
-	//If statements 
-	if (tPlayer == 1) { //Fire Attack 
-		cin >> tPlayer;
-		cout << "Which enemy do you want to attack?" << endl;
+int Attack() {
+	cout << "Which SPELL do you use?" << endl;
+	cout << "              [ [1] = Fire Spell " << " [2] = Water Spell " << " [3] = Grass Spell ] " << endl;
 
+	cin >> tPlayer; 
+	system("cls"); //clears screen 
+
+	//Fire Attack 
+	if (tPlayer == 1) {
+		cout << "Which ENEMY do you attack?" << endl;
+		cin >> tPlayer;
+		
+		//Which Enemy Selected to Attack
+		if (tPlayer == 1) { //Fire Enemy
+
+			Enemy enemy("Fire Enemy");
+			EnemyFire fireEnemy("Fire Enemy", 10, 10); //the name/1st paramtere doesnt work here why?
+
+			tFireHP -= 10;
+			fireEnemy.SetFireHP(-10);
+
+			cout << enemy.GetName() << " took " << fireEnemy.GetFireHP() << " damage. " << endl << "They have " << fireEnemy.GetFireHP() << " HP remaining. " << endl;
+			cout << enemy.GetName() << " Attacked you for " << fireEnemy.GetFireAP() << " Attack Points. " << endl;
+			 
+		}
+		else if (tPlayer == 2) { //Water Enemy 
+
+		}
+		else if (tPlayer == 3) { //Grass Enemy 
+
+		}
+
+	}	
+	//WATER Attack 
+	else if (tPlayer == 2) { 
+		cout << "Which ENEMY do you attack?" << endl;
+		cin >> tPlayer;
+		
+		//Which Enemy Selected to Attack
+		if (tPlayer == 1) { //Fire Enemy
+
+		}
+		else if (tPlayer == 2) { //Water Enemy 
+
+		}
+		else if (tPlayer == 3) { //Grass Enemy 
+
+		}
+	}	
+	//GRASS Attack 
+	else if (tPlayer == 3) { 
+		cout << "Which ENEMY do you attack?" << endl;
+		cin >> tPlayer;
+		
+		//Which Enemy Selected to Attack
 		if (tPlayer == 1) { //Fire Enemy
 
 		}
@@ -149,45 +198,46 @@ int DamageDelt() {
 		}
 	}
 
+	return 2;
 }
 
 
 
 int main()
 {
-	cout << "Turn Based Game" << endl; 
+	cout << "3 Elements Turn Based Game" << endl; 
 
 	//Intro 
-	cout << "Animaal ";
+	cout << "5 Enemies approached you! " << endl;
+	Attack();
 
 
 
 
 
 
-
-	Enemy enemy("Fire Enemy");
-	EnemyFire fireEnemy("Fire Enemy", 10, 10); //the name/1st paramtere doesnt work here why?
-	cout << enemy.GetName() << " took " << fireEnemy.GetFireHP() << " damage. " << endl << "They have " << fireEnemy.GetFireHP() << " HP remaining. " << endl;
-	cout << enemy.GetName() << " Attacked you for " << fireEnemy.GetFireAP() << " Attack Points. " << endl;
 	
-	cout << "What will you do?" << endl;
-	cout << "              [ [1] = Fire Spell " << " [2] = Water Spell " << " [3] = Grass Spell ] " << endl;
 	
-	cin >> tPlayer; //gets user input from the keyboard 
-	system("cls"); //clears screen 
 
 	//
-	if (tPlayer == 1) {
-		cout << "Who will you attack?" << endl;
+	//if (tPlayer == 1) {
+	//	cout << "Who will you attack?" << endl;
 
-		cout << enemy.GetName() << "[1]" << endl;
-		cout << enemy.GetName() << "[2]" << endl;
-		cout << enemy.GetName() << "[3]" << endl;
-		cout << enemy.GetName() << "[4]" << endl;
+	//	cout << enemy.GetName() << "[1]" << endl;
+	//	cout << enemy.GetName() << "[2]" << endl;
+	//	cout << enemy.GetName() << "[3]" << endl;
+	//	cout << enemy.GetName() << "[4]" << endl;
 
-	}
+	//}
+	 
 
+	//in Class
+	//Enemy* enemies[5];
+	//enemies[1] = new EnemyFire;
+	//enemies[2] = new EnemyWater;
+	//enemies[3] = new EnemyGrass;
+	//enemies[4] = new EnemyFire;
+	//enemies[5] = new EnemyWater;
 
 
 	//while (tIsLose == false) { //not using DO WHILE Loops bc they execute thru even after returning true (?)
