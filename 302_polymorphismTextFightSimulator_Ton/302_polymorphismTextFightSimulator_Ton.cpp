@@ -2,6 +2,8 @@
 //
 
 #include <iostream>
+#include <stdlib.h>
+#include <time.h>
 using namespace std;
 
 
@@ -11,8 +13,6 @@ int tPlayer;
 //There are at least three types of monsters.
 int tMonster; // fire = 1, water = 2, grass = 3
 int tElement; // fire = 1, water = 2, grass = 3
-
-//float tEnemyHP = 30;
 
 //Damage Amounts 
 float tEffective = 20;
@@ -63,7 +63,6 @@ public:
 	//	tDamaged -= damage;
 	//}
 };
-
 
 class EnemyFire : public Enemy{
 protected: //so that the children classes can access 
@@ -154,19 +153,19 @@ int Attack() {
 		if (tPlayer == 1) { //Fire Enemy
 
 			Enemy enemy("Fire Enemy");
-			EnemyFire fireEnemy("Fire Enemy", 10, 10); //the name/1st paramtere doesnt work here why?
+			EnemyFire fireEnemy("Fire Enemy", 30, 10); //the name/1st paramtere doesnt work here why?
 
 			fireEnemy.tFireHP -= 10;
 			//fireEnemy.SetFireHP(-10);
 
-			cout << enemy.GetName() << " took " << fireEnemy.GetFireHP() << " damage. " << endl << "They have " << fireEnemy.GetFireHP() << " HP remaining. " << endl;
+			cout << enemy.GetName() << " took " << tDamaged << " damage. " << endl << "They have " << fireEnemy.tFireHP << " HP remaining. " << endl;
 			cout << enemy.GetName() << " Attacked you for " << fireEnemy.GetFireAP() << " Attack Points. " << endl;
 		}
 		
 		else if (tPlayer == 2) { //Water Enemy 
 
 			Enemy enemy("Water Enemy");
-			EnemyWater waterEnemy("Water Enemy", 10, 10);
+			EnemyWater waterEnemy("Water Enemy", 40, 10);
 
 
 			Immune();
@@ -176,12 +175,13 @@ int Attack() {
 		
 		else if (tPlayer == 3) { //Grass Enemy 
 			Enemy enemy("Grass Enemy");
-			EnemyGrass grassEnemy("Grass Enemy", 10, 10); //the name/1st paramtere doesnt work here why?
+			EnemyGrass grassEnemy("Grass Enemy", 50, 10); //the name/1st paramtere doesnt work here why?
 
 			grassEnemy.tGrassHP -= 30;
 
 			Effective();
-			cout << enemy.GetName() << " took 30" << " damage. " << endl << "They have " << grassEnemy.GetGrassHP() << " HP remaining. " << endl;
+			//cout << enemy.GetName() << " took 30" << " damage. " << endl << "They have " << grassEnemy.GetGrassHP() << " HP remaining. " << endl;
+			cout << enemy.GetName() << " took 30" << " damage. " << endl << "They have " << grassEnemy.tGrassHP << " HP remaining. " << endl;
 		}
 
 	}	
@@ -193,7 +193,7 @@ int Attack() {
 		//Which Enemy Selected to Attack
 		if (tPlayer == 1) { //Fire Enemy
 			Enemy enemy("Fire Enemy");
-			EnemyFire fireEnemy("Fire Enemy", 10, 10); //the name/1st paramtere doesnt work here why?
+			EnemyFire fireEnemy("Fire Enemy", 30, 10); //the name/1st paramtere doesnt work here why?
 
 			fireEnemy.tFireHP -= 30;
 
@@ -203,21 +203,23 @@ int Attack() {
 		else if (tPlayer == 2) { //Water Enemy 
 
 			Enemy enemy("Water Enemy");
-			EnemyWater waterEnemy("Water Enemy", 10, 10); //the name/1st paramtere doesnt work here why?
+			EnemyWater waterEnemy("Water Enemy", 40, 10); //the name/1st paramtere doesnt work here why?
 
 			waterEnemy.tWaterHP -= 10;
 			//fireEnemy.SetFireHP(-10);
 
-			cout << enemy.GetName() << " took 20 damage. " << endl << "They have " << waterEnemy.GetWaterHP() << " HP remaining. " << endl;
+			//cout << enemy.GetName() << " took 10 damage. " << endl << "They have " << waterEnemy.GetWaterHP() << " HP remaining. " << endl;
+			cout << enemy.GetName() << " took 10 damage. " << endl << "They have " << waterEnemy.tWaterHP << " HP remaining. " << endl;
 
 		}
 		else if (tPlayer == 3) { //Grass Enemy 
 			Enemy enemy("Grass Enemy");
-			EnemyGrass grassEnemy("Grass Enemy", 10, 10);
+			EnemyGrass grassEnemy("Grass Enemy", 50, 10);
 
 
 			Immune();
-			cout << enemy.GetName() << " took " << tImmune << " damage. " << endl << "They have " << grassEnemy.GetGrassHP() << " HP remaining. " << endl;
+			//cout << enemy.GetName() << " took " << tImmune << " damage. " << endl << "They have " << grassEnemy.GetGrassHP() << " HP remaining. " << endl;
+			cout << enemy.GetName() << " took " << tImmune << " damage. " << endl << "They have " << grassEnemy.tGrassHP << " HP remaining. " << endl;
 
 		}
 	}	
@@ -230,38 +232,57 @@ int Attack() {
 		if (tPlayer == 1) { //Fire Enemy
 
 			Enemy enemy("Fire Enemy");
-			EnemyFire fireEnemy("Fire Enemy", 10, 10); 
+			EnemyFire fireEnemy("Fire Enemy", 30, 10); 
 
 			Immune();
-			cout << enemy.GetName() << " took 0" << " damage. " << endl << "They have " << fireEnemy.GetFireHP() << " HP remaining. " << endl;
+			cout << enemy.GetName() << " took 0" << " damage. " << endl << "They have " << fireEnemy.tFireHP << " HP remaining. " << endl;
 
 		}
 		else if (tPlayer == 2) { //Water Enemy 
 			Enemy enemy("Water Enemy");
-			EnemyWater waterEnemy("Water Enemy", 10, 10); //the name/1st paramtere doesnt work here why?
+			EnemyWater waterEnemy("Water Enemy", 40, 10); //the name/1st paramtere doesnt work here why?
 
 			waterEnemy.tWaterHP -= 20;
 			//fireEnemy.SetFireHP(-10);
 
 			Effective();
-			cout << enemy.GetName() << " took 20 damage. " << endl << "They have " << waterEnemy.GetWaterHP() << " HP remaining. " << endl;
+			cout << enemy.GetName() << " took 20 damage. " << endl << "They have " << waterEnemy.tWaterHP << " HP remaining. " << endl;
 
 		}
 		else if (tPlayer == 3) { //Grass Enemy 
 			Enemy enemy("Grass Enemy");
-			EnemyGrass grassEnemy("Grass Enemy", 10, 10);
+			EnemyGrass grassEnemy("Grass Enemy", 50, 10);
 
 			grassEnemy.tGrassHP -= 10;
 
 
-			cout << enemy.GetName() << " took " << tImmune << " damage. " << endl << "They have " << grassEnemy.GetGrassHP() << " HP remaining. " << endl;
+			cout << enemy.GetName() << " took 10 damage. " << endl << "They have " << grassEnemy.tGrassHP << " HP remaining. " << endl;
 		}
 	}
 
-	return 2;
+	return 2; //doesnt matter i think?
 }
 
 void CheckingEnemyDead() {
+	//Check whos dead 
+	//Enemy enemy("Fire Enemy"); //do i have to instantiate again here?
+	//EnemyFire fireEnemy("Fire Enemy", 10, 10);
+	//Enemy enemy("Water Enemy");
+	//EnemyWater waterEnemy("Water Enemy", 10, 10);
+	//Enemy enemy("Grass Enemy");
+	//EnemyGrass grassEnemy("Grass Enemy", 10, 10);
+
+	
+
+	//if (grassEnemy.tGrassHP <= 0) {
+	//
+	//}
+
+	//Display whos alive
+	cout << "Enemies Alive: " << endl;
+
+	
+
 	Enemy enemy("Grass Enemy");
 	EnemyGrass grassEnemy("Grass Enemy", 10, 10);
 	if (grassEnemy.tGrassHP <= 0) {
@@ -269,6 +290,8 @@ void CheckingEnemyDead() {
 	}
 
 }
+
+
 void EnemyAttack() {
 
 
@@ -276,12 +299,23 @@ void EnemyAttack() {
 
 int main()
 {
+	srand(time(nullptr));
+	int randomNum = rand()%3+1; //chooses out of 4 choices //not 0 1 and 2 bc thers a +1 at the end 
+
+
 	cout << "3 Elements Turn Based Game" << endl;
 	//Intro 
 	cout << "5 Enemies approached you! " << endl;
 
 	while (tIsLose == false) { //(while = don't know how many time repeated loop)
+			
+
+		if (randomNum == 1) {}
+		else if (randomNum == 2){}
+		else if (randomNum == 3){}
+		randomNum = rand() % 3 + 1; //chooses out of 4 choices //not 0 1 and 2 bc thers a +1 at the end 
 	
+
 		Attack();
 		CheckingEnemyDead();
 	}
@@ -300,12 +334,6 @@ int main()
 
 
 
-
-
-
-
-	
-	
 
 	//
 	//if (tPlayer == 1) {
@@ -331,10 +359,7 @@ int main()
 	//while (tIsLose == false) { //not using DO WHILE Loops bc they execute thru even after returning true (?)
 	//	//The player will face five picked at random
 
-
 	//	//The main loop can only hold an array of Monster pointers.That's the whole point.  Stop trying to work around the whole point. LOLLO
-
-
 
 	//	//All the monsters have hitpoints, but start with different hitpoints
 
