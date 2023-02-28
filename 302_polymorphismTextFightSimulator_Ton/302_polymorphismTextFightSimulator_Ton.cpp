@@ -245,7 +245,6 @@ int Attack() {
 			EnemyWater waterEnemy("Water Enemy", 40, 10); //the name/1st paramtere doesnt work here why?
 
 			waterEnemy.tWaterHP -= 20;
-			//fireEnemy.SetFireHP(-10);
 
 			Effective();
 			cout << enemy.GetName() << " took 20 damage. " << endl << "They have " << waterEnemy.tWaterHP << " HP remaining. " << endl;
