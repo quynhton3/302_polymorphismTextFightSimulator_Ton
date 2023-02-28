@@ -14,15 +14,14 @@ int tElement; // fire = 1, water = 2, grass = 3
 
 //float tEnemyHP = 30;
 
-
 //Damage Amounts 
 float tEffective = 20;
 float tDamaged = 10;
 float tImmune = 0;
 
-float tPlayerHP = 100;
+float tPlayerHP = 200;
 bool tIsLose = false;
-
+bool tIsWin = true;
 
 class PlayerMoves {
 protected:
@@ -31,8 +30,6 @@ public:
 
 
 };
-
-
 
 class Enemy {
 protected: 
@@ -70,15 +67,18 @@ public:
 
 class EnemyFire : public Enemy{
 protected: //so that the children classes can access 
-	float tFireHP;
-	float tFireAP;
+
 
 public:
+	float tFireHP = 30;
+	float tFireAP = 30;
 	//What they have separately : What they have in common
 	EnemyFire(string tEnemyName, float tEnemyHP, float tEnemyAP) : Enemy(tEnemyName)
 	{
-		tFireHP = tEnemyHP; //50
-		tFireAP = tEnemyAP; //30
+		//tFireHP = tEnemyHP; //50
+		//tFireAP = tEnemyAP; //30
+		tFireHP = 30; //50
+		tFireAP = 30; //30
 	}
 
 	//Getters and Setters
@@ -92,30 +92,33 @@ public:
 
 class EnemyWater : public Enemy{
 protected: 
-	float tWaterHP = 80;
-	float tWaterAP = 20;
+
 public:
+	float tWaterHP = 40;
+	float tWaterAP = 20;
 	EnemyWater(string tEnemyName, float tEnemyHP, float tEnemyAP) : Enemy(tEnemyName)
 	{
-		tWaterHP = tEnemyHP; //50
-		tWaterAP = tEnemyAP; //30
+		//tWaterHP = tEnemyHP; //50
+		//tWaterAP = tEnemyAP; //30
+		tWaterHP = 40; //50
+		tWaterAP = 20; //30
 	}
 
 	//Getters and Setters
-	void SetFireHP(float tEnemyHP) { tWaterHP = tEnemyHP; }
-	void SetFireAP(float tEnemyAP) { tWaterAP = tEnemyAP; }
+	void SetWaterHP(float tEnemyHP) { tWaterHP = tEnemyHP; }
+	void SetWaterAP(float tEnemyAP) { tWaterAP = tEnemyAP; }
 
-	float GetFireHP() { return tWaterHP; }
-	float GetFireAP() { return tWaterAP; }
+	float GetWaterHP() { return tWaterHP; }
+	float GetWaterAP() { return tWaterAP; }
 
 };
 
-
 class EnemyGrass : public Enemy{
 protected: 
-	float tGrassHP = 90;
-	float tGrassAP = 10;
+
 public:
+	float tGrassHP = 50;
+	float tGrassAP = 10;
 	EnemyGrass(string tEnemyName, float tEnemyHP, float tEnemyAP) : Enemy(tEnemyName)
 	{
 		tGrassHP = tEnemyHP; //50
@@ -123,14 +126,17 @@ public:
 	}
 
 	//Getters and Setters
-	void SetFireHP(float tEnemyHP) { tGrassHP = tEnemyHP; }
-	void SetFireAP(float tEnemyAP) { tGrassAP = tEnemyAP; }
+	void SetGrassHP(float tEnemyHP) { tGrassHP = tEnemyHP; }
+	void SetGrassAP(float tEnemyAP) { tGrassAP = tEnemyAP; }
 
-	float GetFireHP() { return tGrassHP; }
-	float GetFireAP() { return tGrassAP; }
+	float GetGrassHP() { return tGrassHP; }
+	float GetGrassAP() { return tGrassAP; }
 
 };
 
+//Shortcut dialogues 
+void Immune(){cout << "That wasn't super effective..." << endl;}
+void Effective() { cout << "That was super effective!" << endl; }
 
 int Attack() {
 	cout << "Which SPELL do you use?" << endl;
@@ -139,7 +145,7 @@ int Attack() {
 	cin >> tPlayer; 
 	system("cls"); //clears screen 
 
-	//Fire Attack 
+	//Fire Attack ==============================================================================================================================================================================================
 	if (tPlayer == 1) {
 		cout << "Which ENEMY do you attack?" << endl;
 		cin >> tPlayer;
@@ -150,38 +156,72 @@ int Attack() {
 			Enemy enemy("Fire Enemy");
 			EnemyFire fireEnemy("Fire Enemy", 10, 10); //the name/1st paramtere doesnt work here why?
 
-			tFireHP -= 10;
-			fireEnemy.SetFireHP(-10);
+			fireEnemy.tFireHP -= 10;
+			//fireEnemy.SetFireHP(-10);
 
 			cout << enemy.GetName() << " took " << fireEnemy.GetFireHP() << " damage. " << endl << "They have " << fireEnemy.GetFireHP() << " HP remaining. " << endl;
 			cout << enemy.GetName() << " Attacked you for " << fireEnemy.GetFireAP() << " Attack Points. " << endl;
-			 
 		}
+		
 		else if (tPlayer == 2) { //Water Enemy 
 
-		}
-		else if (tPlayer == 3) { //Grass Enemy 
+			Enemy enemy("Water Enemy");
+			EnemyWater waterEnemy("Water Enemy", 10, 10);
 
+
+			Immune();
+			cout << enemy.GetName() << " took " << tImmune << " damage. " << endl << "They have " << waterEnemy.GetWaterHP() << " HP remaining. " << endl;
+
+		}
+		
+		else if (tPlayer == 3) { //Grass Enemy 
+			Enemy enemy("Grass Enemy");
+			EnemyGrass grassEnemy("Grass Enemy", 10, 10); //the name/1st paramtere doesnt work here why?
+
+			grassEnemy.tGrassHP -= 30;
+
+			Effective();
+			cout << enemy.GetName() << " took 30" << " damage. " << endl << "They have " << grassEnemy.GetGrassHP() << " HP remaining. " << endl;
 		}
 
 	}	
-	//WATER Attack 
+	//WATER Attack  ==============================================================================================================================================================================================
 	else if (tPlayer == 2) { 
 		cout << "Which ENEMY do you attack?" << endl;
 		cin >> tPlayer;
 		
 		//Which Enemy Selected to Attack
 		if (tPlayer == 1) { //Fire Enemy
+			Enemy enemy("Fire Enemy");
+			EnemyFire fireEnemy("Fire Enemy", 10, 10); //the name/1st paramtere doesnt work here why?
 
+			fireEnemy.tFireHP -= 30;
+
+			Effective();
+			cout << enemy.GetName() << " took 30" << " damage. " << endl << "They have " << fireEnemy.GetFireHP() << " HP remaining. " << endl;
 		}
 		else if (tPlayer == 2) { //Water Enemy 
 
+			Enemy enemy("Water Enemy");
+			EnemyWater waterEnemy("Water Enemy", 10, 10); //the name/1st paramtere doesnt work here why?
+
+			waterEnemy.tWaterHP -= 10;
+			//fireEnemy.SetFireHP(-10);
+
+			cout << enemy.GetName() << " took 20 damage. " << endl << "They have " << waterEnemy.GetWaterHP() << " HP remaining. " << endl;
+
 		}
 		else if (tPlayer == 3) { //Grass Enemy 
+			Enemy enemy("Grass Enemy");
+			EnemyGrass grassEnemy("Grass Enemy", 10, 10);
+
+
+			Immune();
+			cout << enemy.GetName() << " took " << tImmune << " damage. " << endl << "They have " << grassEnemy.GetGrassHP() << " HP remaining. " << endl;
 
 		}
 	}	
-	//GRASS Attack 
+	//GRASS Attack  ==============================================================================================================================================================================================
 	else if (tPlayer == 3) { 
 		cout << "Which ENEMY do you attack?" << endl;
 		cin >> tPlayer;
@@ -189,27 +229,75 @@ int Attack() {
 		//Which Enemy Selected to Attack
 		if (tPlayer == 1) { //Fire Enemy
 
+			Enemy enemy("Fire Enemy");
+			EnemyFire fireEnemy("Fire Enemy", 10, 10); 
+
+			Immune();
+			cout << enemy.GetName() << " took 0" << " damage. " << endl << "They have " << fireEnemy.GetFireHP() << " HP remaining. " << endl;
+
 		}
 		else if (tPlayer == 2) { //Water Enemy 
+			Enemy enemy("Water Enemy");
+			EnemyWater waterEnemy("Water Enemy", 10, 10); //the name/1st paramtere doesnt work here why?
+
+			waterEnemy.tWaterHP -= 20;
+			//fireEnemy.SetFireHP(-10);
+
+			Effective();
+			cout << enemy.GetName() << " took 20 damage. " << endl << "They have " << waterEnemy.GetWaterHP() << " HP remaining. " << endl;
 
 		}
 		else if (tPlayer == 3) { //Grass Enemy 
+			Enemy enemy("Grass Enemy");
+			EnemyGrass grassEnemy("Grass Enemy", 10, 10);
 
+			grassEnemy.tGrassHP -= 10;
+
+
+			cout << enemy.GetName() << " took " << tImmune << " damage. " << endl << "They have " << grassEnemy.GetGrassHP() << " HP remaining. " << endl;
 		}
 	}
 
 	return 2;
 }
 
+void CheckingEnemyDead() {
+	Enemy enemy("Grass Enemy");
+	EnemyGrass grassEnemy("Grass Enemy", 10, 10);
+	if (grassEnemy.tGrassHP <= 0) {
 
+	}
+
+}
+void EnemyAttack() {
+
+
+}
 
 int main()
 {
-	cout << "3 Elements Turn Based Game" << endl; 
-
+	cout << "3 Elements Turn Based Game" << endl;
 	//Intro 
 	cout << "5 Enemies approached you! " << endl;
-	Attack();
+
+	while (tIsLose == false) { //(while = don't know how many time repeated loop)
+	
+		Attack();
+		CheckingEnemyDead();
+	}
+	//Checking if Player Won/Lost 
+	if (tIsLose == true) { //not really sure how to do else while statements ?
+		cout << "You lost!" << endl;
+		cin >> tPlayer;
+		system("cls");
+	}
+	if (tIsWin == true) {
+		cout << "You Won!" << endl;
+		cin >> tPlayer;
+		system("cls");
+	}
+
+
 
 
 
@@ -334,6 +422,9 @@ int main()
 
 }
 
+//TO DO:
+//Let player know when enemies are Dead
+//
 
 //Classes
 //Create monsters
